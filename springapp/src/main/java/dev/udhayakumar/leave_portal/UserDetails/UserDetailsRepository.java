@@ -1,7 +1,9 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
-    org.springframework.security.core.userdetails.UserDetails findByUsername();
+@Repository
+public interface UserDetailsRepository extends JpaRepository<UserDetails, String> {
+    UserDetails findByUsername(String username);
 }

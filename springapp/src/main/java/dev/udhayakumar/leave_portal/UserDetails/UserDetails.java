@@ -4,34 +4,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class UserDetails{
 
     @Id@GeneratedValue(strategy = GenerationType.UUID)
-    Long id;
-    String username;
-    String password;
-    String role;
-    String firstname;
-    String lastname;
-    boolean status;
-    Date lastLogin;
-    Date createdAt;
-    Date modifiedAt;
+    private String id;
+    private String username;
+    private String password;
+    private String role;
+    private String firstname;
+    private String lastname;
+    private boolean status;
+    private Date lastLogin;
+    private Date createdAt;
+    private Date modifiedAt;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -91,42 +86,11 @@ public class UserDetails implements org.springframework.security.core.userdetail
         this.modifiedAt = modifiedAt;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role);
-        authorities.add(simpleGrantedAuthority);
-        return authorities;
-    }
 
     public String getPassword() {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return status;
-    }
 
     public void setPassword(String password) {
         this.password = password;
