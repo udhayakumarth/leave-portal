@@ -1,9 +1,6 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -12,11 +9,11 @@ public class UserDetails{
 
     @Id@GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String username;
+    private String userName;
     private String password;
     private String role;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private boolean status;
     private Date lastLogin;
     private Date createdAt;
@@ -28,30 +25,6 @@ public class UserDetails{
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public boolean getStatus() {
@@ -102,5 +75,49 @@ public class UserDetails{
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", status=" + status +
+                ", lastLogin=" + lastLogin +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                '}';
     }
 }
