@@ -1,6 +1,8 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
@@ -9,6 +11,7 @@ public class UserDetails{
 
     @Id@GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    @Column(unique = true, nullable = false)
     private String userName;
     private String password;
     private String role;
@@ -16,7 +19,10 @@ public class UserDetails{
     private String lastName;
     private boolean status;
     private Date lastLogin;
+    @Column(nullable = false, updatable = false)
+    @CreatedDate
     private Date createdAt;
+    @LastModifiedDate
     private Date modifiedAt;
 
     public String getId() {

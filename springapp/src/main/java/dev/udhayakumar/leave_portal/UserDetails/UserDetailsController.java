@@ -5,12 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.Objects;
-import java.util.Optional;
 
 
 @Controller
@@ -19,30 +15,23 @@ public class UserDetailsController {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @PostMapping("/createUser")
-    public HttpEntity<Object> createUser(@RequestBody UserDetails newUser){
-        userDetailsService.save(newUser);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/api/v1/users")
+    public HttpEntity<Object> saveUser(@RequestBody UserDetails newUser){
+        logger.info("Controller: Received Request for /api/v1/users with Body: {}",newUser);
+        try{
+            userDetailsService.saveUser(newUser);
+            logger.info("Controller: User Created Successfully: {}",newUser);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User Created Successfully");
+        }catch (Exception e){
+            logger.error("Controller: Error Creating User: {}",e.getMessage(),e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Create User");
+        }
     }
 
-    @GetMapping("/showAll")
-    public HttpEntity<Object> showAll(){
-        return new ResponseEntity<Object>(userDetailsService.showAll(),HttpStatus.OK);
-    }
-
-    @PostMapping("/auth")
+    @PostMapping("/api/v1/auth")
     public HttpEntity<Object> verifyUser(@RequestBody UserDetailsAuthRequestDto userDetailsAuthRequestDto){
-
-        logger.info(userDetailsAuthRequestDto.toString());
-        Optional<UserDetails> userDetails = userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password);
-        logger.info(userDetails.get().toString());
-        if(userDetails.isPresent() && Objects.equals(userDetailsAuthRequestDto.password, userDetails.get().getPassword())){
-            return new ResponseEntity<>(new UserDetailsAuthResponseDto(
-                    userDetails.get().getUserName(),
-                    userDetails.get().getFirstName(),
-                    userDetails.get().getLastName(),
-                    userDetails.get().getStatus()
-            ), HttpStatus.OK);
+        if(userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password)){
+            return new ResponseEntity<>(userDetailsService.getUserDetails(userDetailsAuthRequestDto.username),HttpStatus.OK);
         }else {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Error", "Invalid username or password");
