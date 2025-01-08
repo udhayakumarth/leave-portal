@@ -25,9 +25,22 @@ public class UserDetailsService {
         }
     }
 
-    public boolean authUser(String username, String password) {
-        Optional<UserDetails> userDetails = userDetailsRepository.findByUserName(username);
-        return userDetails.filter(details -> password.equals(details.getPassword())).isPresent();
+    public UserDetailsAuthResponseDto authUser(String username, String password) {
+        logger.info("Service: authUser Called for user: {}",username);
+        try{
+            Optional<UserDetails> userDetails = userDetailsRepository.findByUserName(username);
+            logger.info("Service: User Fetched Successfully: {}",username);
+            try{
+                userDetails.filter(details -> password.equals(details.getPassword()));
+                logger.info("Service: User Authenticated Successfully: {}",username);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (Exception e) {
+            logger.error("Service: Authentication Failed: {}",e.getMessage(),e);
+            throw new RuntimeException("Invalid username or password");
+        }
     }
 
 

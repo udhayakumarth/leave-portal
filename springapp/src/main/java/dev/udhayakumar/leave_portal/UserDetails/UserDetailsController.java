@@ -1,5 +1,6 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +18,24 @@ public class UserDetailsController {
 
     @PostMapping("/api/v1/users")
     public HttpEntity<Object> saveUser(@RequestBody UserDetails newUser){
-        logger.info("Controller: Received Request for /api/v1/users with Body: {}",newUser);
+        logger.info("Controller-Request: /api/v1/users with Body: {}",newUser);
         try{
             userDetailsService.saveUser(newUser);
-            logger.info("Controller: User Created Successfully: {}",newUser);
+            logger.info("Controller-Response: User Created Successfully");
             return ResponseEntity.status(HttpStatus.CREATED).body("User Created Successfully");
         }catch (Exception e){
-            logger.error("Controller: Error Creating User: {}",e.getMessage(),e);
+            logger.error("Controller-Response: Failed to Create User: {}",e.getMessage(),e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Create User");
         }
     }
 
     @PostMapping("/api/v1/auth")
     public HttpEntity<Object> verifyUser(@RequestBody UserDetailsAuthRequestDto userDetailsAuthRequestDto){
-        if(userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password)){
-            return new ResponseEntity<>(userDetailsService.getUserDetails(userDetailsAuthRequestDto.username),HttpStatus.OK);
-        }else {
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Error", "Invalid username or password");
-            return new ResponseEntity<>(headers, HttpStatus.UNAUTHORIZED);
+        logger.info("Controller-Request: /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
     }
 }
