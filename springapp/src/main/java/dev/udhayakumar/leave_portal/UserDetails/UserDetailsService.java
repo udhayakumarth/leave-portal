@@ -31,12 +31,19 @@ public class UserDetailsService {
             Optional<UserDetails> userDetails = userDetailsRepository.findByUserName(username);
             logger.info("Service: User Fetched Successfully: {}",username);
             try{
-                userDetails.filter(details -> password.equals(details.getPassword()));
-                logger.info("Service: User Authenticated Successfully: {}",username);
+                if(userDetails.isPresent() && password.equals(userDetails.get().getPassword())){
+                    logger.info("Service: User Authenticated Successfully: {}",username+password);
+                    return new UserDetailsAuthResponseDto(userDetails.get().getUserName(),
+                            userDetails.get().getFirstName(),
+                            userDetails.get().getLastName(),
+                            userDetails.get().getStatus());
+                }else {
+                    throw new RuntimeException("Authentication Failed");
+                }
+
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
         } catch (Exception e) {
             logger.error("Service: Authentication Failed: {}",e.getMessage(),e);
             throw new RuntimeException("Invalid username or password");
