@@ -17,7 +17,7 @@ public class UserDetailsController {
     UserDetailsService userDetailsService;
 
     @PostMapping("/api/v1/users")
-    public HttpEntity<Object> saveUser(@RequestBody UserDetails newUser){
+    public HttpEntity<Object> saveUser(@RequestBody UserDetailsRequestDto newUser){
         logger.info("Controller-Request: /api/v1/users with Body: {}",newUser);
         try{
             userDetailsService.saveUser(newUser);

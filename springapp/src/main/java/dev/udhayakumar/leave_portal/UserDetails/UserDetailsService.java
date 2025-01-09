@@ -14,10 +14,17 @@ public class UserDetailsService {
 
     Logger logger = LoggerFactory.getLogger(UserDetailsController.class);
 
-    public void saveUser(UserDetails newUser) {
+    public void saveUser(UserDetailsRequestDto newUser) {
         logger.info("Service: saveUser Called with input: {}",newUser);
         try{
-            userDetailsRepository.save(newUser);
+            UserDetails newUserDetails = new UserDetails(
+                    newUser.getUserName(),
+                    newUser.getPassword(),
+                    "staff",
+                    newUser.getFirstName(),
+                    newUser.getLastName()
+            );
+            userDetailsRepository.save(newUserDetails);
             logger.info("Service: User saved successfully: {}",newUser);
         }catch (Exception e){
             logger.error("Service: Failed to save user: {}",e.getMessage(),e);
@@ -49,7 +56,6 @@ public class UserDetailsService {
             throw new RuntimeException("Invalid username or password");
         }
     }
-
 
     public Object getUserDetails(String username) {
         return userDetailsRepository.findByUserName(username);

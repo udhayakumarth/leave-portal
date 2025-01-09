@@ -13,10 +13,15 @@ public class UserDetails{
     private String id;
     @Column(unique = true, nullable = false)
     private String userName;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String role;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false)
     private boolean status;
     private Date lastLogin;
     @Column(nullable = false, updatable = false)
@@ -24,6 +29,23 @@ public class UserDetails{
     private Date createdAt;
     @LastModifiedDate
     private Date modifiedAt;
+
+    public UserDetails() {
+    }
+
+    public UserDetails(String userName, String password, String role, String firstName, String lastName) {
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = true;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
 
     public String getId() {
         return id;
