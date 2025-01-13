@@ -16,7 +16,7 @@ public class UserDetailsController {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @PostMapping("/api/v1/users")
+    @PostMapping("/api/users")
     public HttpEntity<Object> saveUser(@RequestBody UserDetailsRequestDto newUser){
         logger.info("Controller-Request: /api/v1/users with Body: {}",newUser);
         try{
@@ -29,11 +29,13 @@ public class UserDetailsController {
         }
     }
 
-    @PostMapping("/api/v1/auth")
+    @PostMapping("/api/auth")
     public HttpEntity<Object> verifyUser(@RequestBody UserDetailsAuthRequestDto userDetailsAuthRequestDto){
         logger.info("Controller-Request: /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password));
+            UserDetailsAuthResponseDto userDetailsAuthResponseDto = userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password);
+            logger.info("Controller-Response:  ");
+            return ResponseEntity.status(HttpStatus.OK).body(userDetailsAuthResponseDto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
