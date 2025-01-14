@@ -18,7 +18,7 @@ public class UserDetailsController {
 
     @PostMapping("/api/users")
     public HttpEntity<Object> saveUser(@RequestBody UserDetailsRequestDto newUser){
-        logger.info("Controller-Request: /api/v1/users with Body: {}",newUser);
+        logger.info("Controller-Request: POST /api/v1/users with Body: {}",newUser);
         try{
             userDetailsService.saveUser(newUser);
             logger.info("Controller-Response: User Created Successfully");
@@ -31,10 +31,10 @@ public class UserDetailsController {
 
     @PostMapping("/api/auth")
     public HttpEntity<Object> verifyUser(@RequestBody UserDetailsAuthRequestDto userDetailsAuthRequestDto){
-        logger.info("Controller-Request: /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());
+        logger.info("Controller-Request: POST /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());
         try{
             UserDetailsAuthResponseDto userDetailsAuthResponseDto = userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password);
-            logger.info("Controller-Response:  ");
+            logger.info("Controller-Response: Authentication Successful for user {}",userDetailsAuthResponseDto);
             return ResponseEntity.status(HttpStatus.OK).body(userDetailsAuthResponseDto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
