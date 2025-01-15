@@ -1,5 +1,6 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ public class UserDetailsController {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Operation(summary = "Create a new user")
     @PostMapping("/api/users")
     public HttpEntity<Object> saveUser(@RequestBody UserDetailsRequestDto newUser){
         logger.info("Controller-Request: POST /api/v1/users with Body: {}",newUser);
@@ -29,6 +31,7 @@ public class UserDetailsController {
         }
     }
 
+    @Operation(summary = "Authenticate user")
     @PostMapping("/api/auth")
     public HttpEntity<Object> verifyUser(@RequestBody UserDetailsAuthRequestDto userDetailsAuthRequestDto){
         logger.info("Controller-Request: POST /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());

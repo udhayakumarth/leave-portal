@@ -27,19 +27,23 @@ public class Leave {
     @Column(nullable = false)
     String status;
 
+    Date approvedAt;
+
+    @Column(nullable = false, updatable = false)
+    @CreatedDate
+    private Date createdAt;
+
+    @LastModifiedDate
+    Date modifiedAt;
+
     @JoinColumn(nullable = false)
     @ManyToOne
     UserDetails user;
 
-    Date approvedAt;
-
-    @Column(nullable = false)
-    @CreatedDate
-    Date createdAt;
-
-    @Column(nullable = false)
-    @LastModifiedDate
-    Date modifiedAt;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
 
     public Leave(Date leaveFrom, Date leaveTo, String leaveType, String comments, String status, UserDetails user) {
         this.leaveFrom = leaveFrom;
@@ -48,6 +52,10 @@ public class Leave {
         this.comments = comments;
         this.status = status;
         this.user = user;
+    }
+
+    public Leave() {
+
     }
 
     public String getId() {
@@ -128,5 +136,21 @@ public class Leave {
 
     public void setApprovedAt(Date approvedAt) {
         this.approvedAt = approvedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Leave{" +
+                "id='" + id + '\'' +
+                ", leaveFrom=" + leaveFrom +
+                ", leaveTo=" + leaveTo +
+                ", leaveType='" + leaveType + '\'' +
+                ", comments='" + comments + '\'' +
+                ", status='" + status + '\'' +
+                ", user=" + user +
+                ", approvedAt=" + approvedAt +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package dev.udhayakumar.leave_portal.Leave;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class LeaveController {
     @Autowired
     LeaveService leaveService;
 
+    @Operation(summary = "To Submit New Leave")
     @PostMapping("/api/leave")
     public HttpEntity<Object> applyLeave(@RequestBody ApplyLeaveRequestDto newLeave) {
         logger.info("Controller-Request: POST /api/leave with body {}",newLeave);
@@ -40,6 +42,7 @@ public class LeaveController {
         }
     }
 
+    @Operation(summary = "To Fetch Leave By ID")
     @GetMapping("/api/leave/{id}")
     public HttpEntity<Object> viewLeave(@PathVariable String id){
         logger.info("Controller-Request: GET /api/leave/{}",id);

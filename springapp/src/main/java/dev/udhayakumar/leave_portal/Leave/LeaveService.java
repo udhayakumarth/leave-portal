@@ -16,6 +16,8 @@ public class LeaveService {
 
     @Autowired
     LeaveRepository leaveRepository;
+
+    @Autowired
     UserDetailsService userDetailsService;
 
     Logger logger = LoggerFactory.getLogger(LeaveService.class);
@@ -33,6 +35,7 @@ public class LeaveService {
                         "Pending",
                         userDetails.get()
                 );
+                logger.info("Leave 00: {}",leave);
                 leaveRepository.save(leave);
                 logger.info("Service: Leave posted successfully with id {}",leave.getId());
                 return leave.getId();
