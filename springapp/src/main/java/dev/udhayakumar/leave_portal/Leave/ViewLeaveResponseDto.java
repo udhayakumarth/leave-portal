@@ -111,4 +111,20 @@ public class ViewLeaveResponseDto {
     public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
+
+    @Override
+    public String toString() {
+        return "ViewLeaveResponseDto{" +
+                "id='" + id + '\'' +
+                ", leaveFrom=" + leaveFrom +
+                ", leaveTo=" + leaveTo +
+                ", leaveType='" + leaveType + '\'' +
+                ", comments='" + comments + '\'' +
+                ", status='" + status + '\'' +
+                ", userName='" + userName + '\'' +
+                ", approvedAt=" + approvedAt +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                '}';
+    }
 }

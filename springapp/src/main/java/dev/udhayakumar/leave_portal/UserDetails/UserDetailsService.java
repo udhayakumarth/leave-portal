@@ -57,7 +57,7 @@ public class UserDetailsService {
         }
     }
 
-    public Object getUserDetails(String username) {
+    public Optional<UserDetails> getUserDetailsByUserName(String username) {
         return userDetailsRepository.findByUserName(username);
     }
 }

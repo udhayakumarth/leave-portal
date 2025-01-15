@@ -12,7 +12,6 @@ public class ApplyLeaveRequestDto {
     Date leaveTo;
     String leaveType;
     String comments;
-    String status;
     String userName;
 
 
@@ -49,13 +48,6 @@ public class ApplyLeaveRequestDto {
         this.comments = comments;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getUserName() {
         return userName;
@@ -63,5 +55,16 @@ public class ApplyLeaveRequestDto {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplyLeaveRequestDto{" +
+                "leaveFrom=" + leaveFrom +
+                ", leaveTo=" + leaveTo +
+                ", leaveType='" + leaveType + '\'' +
+                ", comments='" + comments + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }

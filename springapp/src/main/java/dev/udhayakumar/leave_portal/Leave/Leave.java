@@ -28,7 +28,7 @@ public class Leave {
     @Column(nullable = false)
     String status;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     @ManyToOne
     UserDetails user;
 
@@ -41,6 +41,23 @@ public class Leave {
     @Column(nullable = false)
     @LastModifiedDate
     Date modifiedAt;
+
+    public Leave(Data leaveFrom, Date leaveTo, String leaveType, String comments, String status, UserDetails user) {
+        this.leaveFrom = leaveFrom;
+        this.leaveTo = leaveTo;
+        this.leaveType = leaveType;
+        this.comments = comments;
+        this.status = status;
+        this.user = user;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public UserDetails getUser() {
         return user;
