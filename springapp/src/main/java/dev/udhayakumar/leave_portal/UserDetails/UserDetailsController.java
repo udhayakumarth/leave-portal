@@ -34,7 +34,7 @@ public class UserDetailsController {
         logger.info("Controller-Request: POST /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());
         try{
             UserDetailsAuthResponseDto userDetailsAuthResponseDto = userDetailsService.authUser(userDetailsAuthRequestDto.username, userDetailsAuthRequestDto.password);
-            logger.info("Controller-Response: Authentication Successful for user {}",userDetailsAuthResponseDto);
+            logger.info("Controller-Response: Authentication Successful for user {}",userDetailsAuthResponseDto.toString());
             return ResponseEntity.status(HttpStatus.OK).body(userDetailsAuthResponseDto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");

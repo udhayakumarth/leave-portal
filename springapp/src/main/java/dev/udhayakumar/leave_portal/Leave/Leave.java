@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Entity
@@ -16,7 +15,7 @@ public class Leave {
     String id;
 
     @Column(nullable = false)
-    Data leaveFrom;
+    Date leaveFrom;
 
     @Column(nullable = false)
     Date leaveTo;
@@ -42,7 +41,7 @@ public class Leave {
     @LastModifiedDate
     Date modifiedAt;
 
-    public Leave(Data leaveFrom, Date leaveTo, String leaveType, String comments, String status, UserDetails user) {
+    public Leave(Date leaveFrom, Date leaveTo, String leaveType, String comments, String status, UserDetails user) {
         this.leaveFrom = leaveFrom;
         this.leaveTo = leaveTo;
         this.leaveType = leaveType;
@@ -67,11 +66,11 @@ public class Leave {
         this.user = user;
     }
 
-    public Data getLeaveFrom() {
+    public Date getLeaveFrom() {
         return leaveFrom;
     }
 
-    public void setLeaveFrom(Data leaveFrom) {
+    public void setLeaveFrom(Date leaveFrom) {
         this.leaveFrom = leaveFrom;
     }
 

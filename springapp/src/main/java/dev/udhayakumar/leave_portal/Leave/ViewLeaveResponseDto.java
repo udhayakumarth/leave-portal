@@ -4,12 +4,12 @@ import jakarta.persistence.Column;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.xml.crypto.Data;
+
 import java.util.Date;
 
 public class ViewLeaveResponseDto {
     String id;
-    Data leaveFrom;
+    Date leaveFrom;
     Date leaveTo;
     String leaveType;
     String comments;
@@ -19,7 +19,7 @@ public class ViewLeaveResponseDto {
     Date createdAt;
     Date modifiedAt;
 
-    public ViewLeaveResponseDto(String id, Data leaveFrom, Date leaveTo, String leaveType, String comments, String status, String userName, Date approvedAt, Date createdAt, Date modifiedAt) {
+    public ViewLeaveResponseDto(String id, Date leaveFrom, Date leaveTo, String leaveType, String comments, String status, String userName, Date approvedAt, Date createdAt, Date modifiedAt) {
         this.id = id;
         this.leaveFrom = leaveFrom;
         this.leaveTo = leaveTo;
@@ -40,11 +40,11 @@ public class ViewLeaveResponseDto {
         this.id = id;
     }
 
-    public Data getLeaveFrom() {
+    public Date getLeaveFrom() {
         return leaveFrom;
     }
 
-    public void setLeaveFrom(Data leaveFrom) {
+    public void setLeaveFrom(Date leaveFrom) {
         this.leaveFrom = leaveFrom;
     }
 

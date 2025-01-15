@@ -1,16 +1,30 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
+import org.springframework.data.annotation.CreatedDate;
+
+import java.util.Date;
+
 public class UserDetailsAuthResponseDto {
     String username;
     String firstname;
     String lastname;
     boolean status;
+    Date createdAt;
 
-    public UserDetailsAuthResponseDto(String username, String firstname, String lastname, boolean status) {
+    public UserDetailsAuthResponseDto(String username, String firstname, String lastname, boolean status,Date createdAt) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getUsername() {
@@ -43,5 +57,16 @@ public class UserDetailsAuthResponseDto {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetailsAuthResponseDto{" +
+                "username='" + username + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

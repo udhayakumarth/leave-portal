@@ -8,7 +8,7 @@ import javax.xml.crypto.Data;
 import java.util.Date;
 
 public class ApplyLeaveRequestDto {
-    Data leaveFrom;
+    Date leaveFrom;
     Date leaveTo;
     String leaveType;
     String comments;
@@ -16,11 +16,11 @@ public class ApplyLeaveRequestDto {
 
 
 
-    public Data getLeaveFrom() {
+    public Date getLeaveFrom() {
         return leaveFrom;
     }
 
-    public void setLeaveFrom(Data leaveFrom) {
+    public void setLeaveFrom(Date leaveFrom) {
         this.leaveFrom = leaveFrom;
     }
 

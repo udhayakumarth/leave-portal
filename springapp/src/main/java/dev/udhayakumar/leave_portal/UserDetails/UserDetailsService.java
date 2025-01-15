@@ -43,7 +43,8 @@ public class UserDetailsService {
                     return new UserDetailsAuthResponseDto(userDetails.get().getUserName(),
                             userDetails.get().getFirstName(),
                             userDetails.get().getLastName(),
-                            userDetails.get().getStatus());
+                            userDetails.get().getStatus(),
+                            userDetails.get().getCreatedAt());
                 }else {
                     throw new RuntimeException("Authentication Failed");
                 }
