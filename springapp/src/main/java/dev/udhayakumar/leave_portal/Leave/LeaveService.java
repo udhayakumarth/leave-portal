@@ -27,15 +27,10 @@ public class LeaveService {
         try {
             Optional<UserDetails> userDetails = userDetailsService.getUserDetailsByUserName(newLeave.getUserName());
             if(userDetails.isPresent()){
-                Leave leave = new Leave(
-                        newLeave.getLeaveFrom(),
-                        newLeave.getLeaveTo(),
-                        newLeave.getLeaveType(),
-                        newLeave.getComments(),
-                        "Pending",
-                        userDetails.get()
-                );
-                logger.info("Leave 00: {}",leave);
+                Leave leave = LeaveMapper.toEntity(newLeave);
+                leave.setUser(userDetails.get());
+                leave.setStatus("Pending");
+                logger.info("Final format leave: {}", leave.toString());
                 leaveRepository.save(leave);
                 logger.info("Service: Leave posted successfully with id {}",leave.getId());
                 return leave.getId();
@@ -51,18 +46,7 @@ public class LeaveService {
         logger.info("Service: fetchLeave for {}",id);
         try{
             Optional<Leave> leave = leaveRepository.findById(id);
-            return leave.map(value -> new ViewLeaveResponseDto(
-                    value.getId(),
-                    value.getLeaveFrom(),
-                    value.getLeaveTo(),
-                    value.getLeaveType(),
-                    value.getComments(),
-                    value.getStatus(),
-                    value.getUser().getUserName(),
-                    value.getApprovedAt(),
-                    value.getCreatedAt(),
-                    value.getModifiedAt()
-            )).orElse(null);
+            return leave.map(LeaveMapper::toDto).orElse(null);
         } catch (Exception e) {
             logger.error("Service: Error Fetching Leave {}, error {}",id,e.getMessage());
             throw new RuntimeException(e);

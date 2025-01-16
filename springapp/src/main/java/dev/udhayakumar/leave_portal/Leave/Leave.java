@@ -40,6 +40,13 @@ public class Leave {
     @ManyToOne
     UserDetails user;
 
+    public Leave(Date leaveFrom, Date leaveTo, String leaveType, String comments) {
+        this.leaveFrom = leaveFrom;
+        this.leaveTo = leaveTo;
+        this.leaveType = leaveType;
+        this.comments = comments;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();

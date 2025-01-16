@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class ViewLeaveResponseDto {
     String id;
-    Date leaveFrom;
-    Date leaveTo;
+    String leaveFrom;
+    String leaveTo;
     String leaveType;
     String comments;
     String status;
@@ -19,7 +19,7 @@ public class ViewLeaveResponseDto {
     Date createdAt;
     Date modifiedAt;
 
-    public ViewLeaveResponseDto(String id, Date leaveFrom, Date leaveTo, String leaveType, String comments, String status, String userName, Date approvedAt, Date createdAt, Date modifiedAt) {
+    public ViewLeaveResponseDto(String id, String leaveFrom, String leaveTo, String leaveType, String comments, String status, String userName, Date approvedAt, Date createdAt, Date modifiedAt) {
         this.id = id;
         this.leaveFrom = leaveFrom;
         this.leaveTo = leaveTo;
@@ -40,19 +40,19 @@ public class ViewLeaveResponseDto {
         this.id = id;
     }
 
-    public Date getLeaveFrom() {
+    public String getLeaveFrom() {
         return leaveFrom;
     }
 
-    public void setLeaveFrom(Date leaveFrom) {
+    public void setLeaveFrom(String leaveFrom) {
         this.leaveFrom = leaveFrom;
     }
 
-    public Date getLeaveTo() {
+    public String getLeaveTo() {
         return leaveTo;
     }
 
-    public void setLeaveTo(Date leaveTo) {
+    public void setLeaveTo(String leaveTo) {
         this.leaveTo = leaveTo;
     }
 

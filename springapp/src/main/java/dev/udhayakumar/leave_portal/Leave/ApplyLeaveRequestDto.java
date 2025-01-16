@@ -1,34 +1,42 @@
 package dev.udhayakumar.leave_portal.Leave;
 
-import dev.udhayakumar.leave_portal.UserDetails.UserDetails;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 public class ApplyLeaveRequestDto {
-    Date leaveFrom;
-    Date leaveTo;
+
+    @NotBlank(message = "{error.field.required}")
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "{error.field.invalid.date}")
+    String leaveFrom;
+
+    @NotBlank(message = "{error.field.required}")
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "{error.field.invalid.date}")
+    String leaveTo;
+
+    @NotBlank(message = "{error.field.required}")
     String leaveType;
+
+    @NotBlank(message = "{error.field.required}")
     String comments;
+
+    @NotBlank(message = "{error.field.required}")
     String userName;
 
-
-
-    public Date getLeaveFrom() {
+    public String getLeaveFrom() {
         return leaveFrom;
     }
 
-    public void setLeaveFrom(Date leaveFrom) {
+    public void setLeaveFrom(String leaveFrom) {
         this.leaveFrom = leaveFrom;
     }
 
-    public Date getLeaveTo() {
+    public String getLeaveTo() {
         return leaveTo;
     }
 
-    public void setLeaveTo(Date leaveTo) {
+    public void setLeaveTo(String leaveTo) {
         this.leaveTo = leaveTo;
     }
 

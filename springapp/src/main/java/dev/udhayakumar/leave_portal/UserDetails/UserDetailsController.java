@@ -32,7 +32,7 @@ public class UserDetailsController {
     }
 
     @Operation(summary = "Authenticate user")
-    @PostMapping("/api/auth")
+    @PostMapping("/api/users/auth")
     public HttpEntity<Object> verifyUser(@RequestBody UserDetailsAuthRequestDto userDetailsAuthRequestDto){
         logger.info("Controller-Request: POST /api/v1/auth username: {}",userDetailsAuthRequestDto.getUsername());
         try{
