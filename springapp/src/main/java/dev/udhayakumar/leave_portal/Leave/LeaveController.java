@@ -1,6 +1,7 @@
 package dev.udhayakumar.leave_portal.Leave;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class LeaveController {
 
     @Operation(summary = "To Submit New Leave")
     @PostMapping("/api/leave")
-    public HttpEntity<Object> applyLeave(@RequestBody ApplyLeaveRequestDto newLeave) {
+    public HttpEntity<Object> applyLeave(@Valid @RequestBody ApplyLeaveRequestDto newLeave) {
         logger.info("Controller-Request: POST /api/leave with body {}",newLeave);
         try{
             String leaveId = leaveService.applyLeave(newLeave);

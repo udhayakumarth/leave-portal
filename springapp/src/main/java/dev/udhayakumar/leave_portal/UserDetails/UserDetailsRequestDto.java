@@ -1,9 +1,20 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
+
+import jakarta.validation.constraints.NotBlank;
+
 public class UserDetailsRequestDto {
+
+    @NotBlank(message = "{error.field.required.userName}")
     private String userName;
+
+    @NotBlank(message = "{error.field.required.password}")
     private String password;
+
+    @NotBlank(message = "{error.field.required.firstName}")
     private String firstName;
+
+    @NotBlank(message = "{error.field.required.lastName}")
     private String lastName;
 
 

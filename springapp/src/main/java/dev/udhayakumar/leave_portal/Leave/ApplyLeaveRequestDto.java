@@ -3,25 +3,24 @@ package dev.udhayakumar.leave_portal.Leave;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-import java.util.Date;
 
 public class ApplyLeaveRequestDto {
 
-    @NotBlank(message = "{error.field.required}")
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "{error.field.invalid.date}")
+    @NotBlank(message = "{error.field.required.leaveFrom}")
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "{error.field.invalid.date.leaveFrom}")
     String leaveFrom;
 
-    @NotBlank(message = "{error.field.required}")
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "{error.field.invalid.date}")
+    @NotBlank(message = "{error.field.required.leaveTo}")
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "{error.field.invalid.date.leaveTo}")
     String leaveTo;
 
-    @NotBlank(message = "{error.field.required}")
+    @NotBlank(message = "{error.field.required.leaveType}")
     String leaveType;
 
-    @NotBlank(message = "{error.field.required}")
+    @NotBlank(message = "{error.field.required.comments}")
     String comments;
 
-    @NotBlank(message = "{error.field.required}")
+    @NotBlank(message = "{error.field.required.userName}")
     String userName;
 
     public String getLeaveFrom() {

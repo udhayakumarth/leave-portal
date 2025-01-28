@@ -1,7 +1,13 @@
 package dev.udhayakumar.leave_portal.UserDetails;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class UserDetailsAuthRequestDto {
+
+    @NotBlank(message = "{error.field.required.userName}")
     String username;
+
+    @NotBlank(message = "{error.field.required.password}")
     String password;
 
     public String getUsername() {
