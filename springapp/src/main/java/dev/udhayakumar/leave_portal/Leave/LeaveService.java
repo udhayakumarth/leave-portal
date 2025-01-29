@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +51,27 @@ public class LeaveService {
             return leave.map(LeaveMapper::toDto).orElse(null);
         } catch (Exception e) {
             logger.error("Service: Error Fetching Leave {}, error {}",id,e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<ViewLeaveResponseDto> fetchAllLeave(String userName) {
+        logger.info("Service: fetchAllLeave for {}",userName);
+        try {
+            Optional<UserDetails> userDetails = userDetailsService.getUserDetailsByUserName(userName);
+            if (userDetails.isPresent()){
+                List<Leave> allLeavesByUser= leaveRepository.findAllByUser(userDetails.get());
+                List<ViewLeaveResponseDto> allLeavesByUserDto = new ArrayList<>();
+                for(Leave i : allLeavesByUser){
+                    allLeavesByUserDto.add(LeaveMapper.toDto(i));
+                }
+                logger.info("Service: fetchAllLeave for {} success",userName);
+                return allLeavesByUserDto;
+            }
+            return null;
+
+        } catch (Exception e) {
+            logger.error("Service: Error Fetching Leave {}, error {}",userName,e.getMessage());
             throw new RuntimeException(e);
         }
     }

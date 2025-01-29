@@ -49,10 +49,23 @@ public class LeaveController {
         logger.info("Controller-Request: GET /api/leave/{}",id);
         try{
             ViewLeaveResponseDto leaveResponseDto = leaveService.fetchLeave(id);
-            logger.info("Controller-Response: Leave Fetched Successfuly {}",leaveResponseDto.toString());
+            logger.info("Controller-Response: Leave Fetched Successfully {}",leaveResponseDto.toString());
             return ResponseEntity.status(HttpStatus.OK).body(leaveResponseDto);
         } catch (Exception e) {
             logger.error("Controller-Response: Failed to Fetch the leave {} error {}",id,e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/api/leave/user/{userName}")
+    public HttpEntity<Object> viewAllLeave(@PathVariable String userName){
+        logger.info("Controller-Request: GET /api/leave/user/{}",userName);
+        try{
+            List<ViewLeaveResponseDto> viewLeaveResponseDtos = leaveService.fetchAllLeave(userName);
+            logger.info("Controller-Response: Leave Fetched Successfully");
+            return ResponseEntity.status(HttpStatus.OK).body(viewLeaveResponseDtos);
+        } catch (Exception e) {
+            logger.error("Controller-Response: Failed to Fetch the leave {} error {}",userName,e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
