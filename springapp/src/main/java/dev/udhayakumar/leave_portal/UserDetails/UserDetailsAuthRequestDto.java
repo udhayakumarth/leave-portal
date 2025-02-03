@@ -10,6 +10,11 @@ public class UserDetailsAuthRequestDto {
     @NotBlank(message = "{error.field.required.password}")
     String password;
 
+    public UserDetailsAuthRequestDto(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }

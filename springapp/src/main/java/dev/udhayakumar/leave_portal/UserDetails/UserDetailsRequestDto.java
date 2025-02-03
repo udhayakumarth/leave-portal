@@ -17,6 +17,12 @@ public class UserDetailsRequestDto {
     @NotBlank(message = "{error.field.required.lastName}")
     private String lastName;
 
+    public UserDetailsRequestDto(String userName, String password, String firstName, String lastName) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public String getUserName() {
         return userName;

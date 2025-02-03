@@ -23,6 +23,14 @@ public class ApplyLeaveRequestDto {
     @NotBlank(message = "{error.field.required.userName}")
     String userName;
 
+    public ApplyLeaveRequestDto(String leaveFrom, String leaveTo, String leaveType, String comments, String userName) {
+        this.leaveFrom = leaveFrom;
+        this.leaveTo = leaveTo;
+        this.leaveType = leaveType;
+        this.comments = comments;
+        this.userName = userName;
+    }
+
     public String getLeaveFrom() {
         return leaveFrom;
     }
